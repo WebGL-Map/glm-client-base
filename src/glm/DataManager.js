@@ -23,30 +23,6 @@ export let _requestAnimationFrameId;
 export let dataManager = null;
 
 /**
- * @type {Event} the pre chunks render event.
- * @private
- */
-export const _preTerrainRender = new Event('preTerrainRender');
-
-/**
- * @type {Event} the post chunks render event.
- * @private
- */
-export const _postTerrainRender = new Event('postTerrainRender');
-
-/**
- * @type {Event} the pre players render event.
- * @private
- */
-export const _prePlayersRender = new Event('prePlayersRender');
-
-/**
- * @type {Event} the post players render event.
- * @private
- */
-export const _postPlayersRender = new Event('postPlayersRender');
-
-/**
  * The global container object.
  *
  * @author Tyler Bucher
@@ -88,17 +64,17 @@ export class DataManager {
         /** @type {number} the time in milliseconds when a new chunk should be fetched.*/
         this.chunkCacheLifetime = 0;
         /** @type {Array<Entry> | null} a list of block types from the server.*/
-        this.blockTypes         = null;
+        this.blockTypes = null;
         /** @type {Array<Entry> | null} a list of block traits from the server.*/
-        this.blockTraits        = null;
+        this.blockTraits = null;
         /** @type {Map<String, Server> | null} a map of all available servers this map can access.*/
-        this.serverMap          = null;
+        this.serverMap = null;
         /** @type {Server | null} the primary server this map connected to.*/
-        this.primaryServer      = null;
+        this.primaryServer = null;
         /** @type {Server | null} the currently selected server.*/
-        this.selectedServer     = null;
+        this.selectedServer = null;
         /** @type {World | null} the currently selected world.*/
-        this.selectedWorld      = null;
+        this.selectedWorld = null;
         /** @type {TexturePack | null} the texture pack to use for data generation and rendering.*/
         this.texturePack = null;
     }
@@ -116,7 +92,7 @@ export class DataManager {
         this.blockTypes  = [];
         this.blockTraits = [];
         this.serverMap   = new Map();
-        this.state = GlobalStates.LOADING;
+        this.state       = GlobalStates.LOADING;
         this.eventManager.dispatchEvent(new Event("postInit"));
     }
 
@@ -252,14 +228,15 @@ export class DataManager {
      */
     static draw() {
         if (GLM_CONFIG.debug) window.dataManager.stats.begin();
+        let start = Date.now();
         // Render blocks
-        window.dataManager.eventManager.dispatchEvent(window._preTerrainRender);
+        window.dataManager.eventManager.dispatchEvent(new Event('preTerrainRender'));
         window.dataManager.texturePack.renderBlocks(window.dataManager.selectedWorld.camera, window.dataManager.selectedWorld.chunkMap);
-        window.dataManager.eventManager.dispatchEvent(window._postTerrainRender);
+        window.dataManager.eventManager.dispatchEvent(new Event('postTerrainRender', {elapsedTime: Date.now() - start}));
         // Render players
-        window.dataManager.eventManager.dispatchEvent(window._prePlayersRender);
+        window.dataManager.eventManager.dispatchEvent(new Event('prePlayersRender', {elapsedTime: Date.now() - start}));
         window.dataManager.texturePack.renderPlayers(window.dataManager.selectedWorld.camera, window.dataManager.selectedWorld);
-        window.dataManager.eventManager.dispatchEvent(window._postPlayersRender);
+        window.dataManager.eventManager.dispatchEvent(new Event('postPlayersRender', {elapsedTime: Date.now() - start}));
 
         if (GLM_CONFIG.debug) window.dataManager.stats.end();
 
