@@ -60,9 +60,13 @@ export default class TexturePack {
     /**
      * Creates a new player object.
      *
+     * @param {String} name the name of the player.
+     * @param {String} id the id of the player.
+     * @param {Vector3} position the position of the player.
+     *
      * @return {Player} the newly created player.
      */
-    createPlayer() {
+    createPlayer(name, id, position) {
         throw new Error('Method not implemented!');
     }
 
