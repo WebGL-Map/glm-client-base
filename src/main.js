@@ -25,8 +25,46 @@ import Command from './glm/websocket/Command';
 import CommandRegistrar from './glm/websocket/CommandRegistrar';
 import WebSocketClient from './glm/websocket/WebSocketClient';
 
-import {_requestAnimationFrameId,dataManager, _preTerrainRender, _postTerrainRender,
-    _prePlayersRender, _postPlayersRender, DataManager} from './glm/DataManager';
+import {_requestAnimationFrameId as _requestAnimationFrameId, dataManager as dataManager,
+    DataManager as DataManager} from './glm/DataManager';
 import GlobalStates from './glm/GlobalStates';
 import ServerStates from './glm/ServerSates';
 
+import {GLM_CONFIG as GLM_CONFIG} from './config';
+
+export {
+    Block,
+    Entry,
+    Camera,
+    Chunk,
+    ChunkRequestInfo,
+    World,
+    WorldBorder,
+    Player,
+    Server,
+
+    Event,
+    EventManager,
+
+    Plugin,
+    PluginManager,
+
+    Program,
+    Shader,
+    TexturePack,
+
+    Util,
+
+    Command,
+    CommandRegistrar,
+    WebSocketClient,
+
+    _requestAnimationFrameId,
+    dataManager,
+    DataManager,
+
+    GlobalStates,
+    ServerStates,
+
+    GLM_CONFIG
+}

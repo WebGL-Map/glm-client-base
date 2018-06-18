@@ -1,15 +1,14 @@
 {
   "name": "glm-client-base",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "The base library for the GLM client.",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/WebGL-Map/glm-client-base.git"
   },
-  "main": "dist/glm-client-base.js",
-  "module": "dist/glm-client-base.esm.js",
-  "browser": "dist/glm-client-base.js",
+  "main": "dist/glm.umd.js",
+  "module": "dist/glm.umd.js",
   "dependencies": {
     "math.gl": "^1.0.4",
     "stats.js": "^0.17.0",
@@ -26,7 +25,8 @@
     "webpack-cli": "^2.0.10"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "webpack --mode production",

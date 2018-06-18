@@ -1,19 +1,17 @@
 const path = require('path');
 
-const entryFile  = './src/main.js';
-const configFile = './src/config.js';
+const entryFile = './src/main.js';
 
 module.exports = {
-    entry : {
-        glm   : entryFile,
-        config: configFile
+    entry    : {
+        glm: entryFile,
     },
-    output: {
+    output   : {
         path         : __dirname + '/dist',
         filename     : '[name].umd.js',
         libraryTarget: 'umd',
     },
-    module: {
+    module   : {
         rules: [
             {
                 test   : path.join(__dirname, 'src'),
@@ -24,4 +22,8 @@ module.exports = {
             }
         ]
     },
-};
+    externals: {
+        "math.gl": 'math.gl',
+    },
+}
+;
