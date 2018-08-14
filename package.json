@@ -1,6 +1,6 @@
 {
   "name": "glm-client-base",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The base library for the GLM client.",
   "license": "MIT",
   "repository": {
