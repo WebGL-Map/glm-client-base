@@ -6,7 +6,7 @@ import GlobalStates from "./GlobalStates";
 import {GLM_CONFIG} from "../config";
 import Server from "./data/server/Server";
 import Util from "./util/Util";
-import {Stats} from "stats.js";
+import Stats from "stats.js";
 
 /**
  * Holds the id of an animation frame given from requestAnimationFrame.

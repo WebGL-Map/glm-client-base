@@ -1,5 +1,4 @@
 import Camera from "../../data/server/world/Camera";
-import Entry from "../../data/server/world/block/Entry";
 import Chunk from "../../data/server/world/Chunk";
 import Block from "../../data/server/world/block/Block";
 
@@ -20,14 +19,29 @@ export default class TexturePack {
     /**
      * Creates a unique block from the texture pack.
      *
-     * @param {Entry} blockType the type of block to create.
+     * @param {String} blockType the type of block to create.
      * @param {Number} x the x position.
      * @param {Number} y the y position.
      * @param {Number} z the z position.
      *
-     * @return {Block} the newly created block.
+     * @return {Block|null} the newly created block or null.
      */
     createBlock(blockType, x, y, z) {
+        throw new Error('Method not implemented!');
+    }
+
+    /**
+     * Updates a unique block from the texture pack.
+     *
+     * @param {Block} block the block to update.
+     * @param {String} blockType the type of block to create.
+     * @param {Number} x the x position.
+     * @param {Number} y the y position.
+     * @param {Number} z the z position.
+     *
+     * @return {Block|null} the newly created block or null.
+     */
+    updateBlock(block, blockType, x, y, z) {
         throw new Error('Method not implemented!');
     }
 
@@ -40,7 +54,7 @@ export default class TexturePack {
      * @param {Number} y the y position.
      * @param {Number} z the z position.
      *
-     * @return {Chunk} the newly created chunk.
+     * @return {Chunk|null} the newly created chunk or null.
      */
     createChunk(dataArray, heightDataArray, x, y, z) {
         throw new Error('Method not implemented!');
@@ -64,7 +78,7 @@ export default class TexturePack {
      * @param {String} id the id of the player.
      * @param {Vector3} position the position of the player.
      *
-     * @return {Player} the newly created player.
+     * @return {Player|null} the newly created player or null.
      */
     createPlayer(name, id, position) {
         throw new Error('Method not implemented!');
@@ -87,8 +101,22 @@ export default class TexturePack {
      * @param {String} name the name of the world.
      * @param {boolean} isDefault states if this world is default.
      * @param {Vector3} spawnPoint the spawn point of the world.
+     *
+     * @return {World|null} the newly crated world or null.
      */
     createWorld(id, name, isDefault, spawnPoint) {
+        throw new Error('Method not implemented!');
+    }
+
+    /**
+     * Creates a new world border
+     *
+     * @param {Vector3} center the center position of the border.
+     * @param {Number} diameter the diameter of the border.
+     *
+     * @return {WorldBorder|null} the newly created world border or null.
+     */
+    createWorldBorder(center, diameter) {
         throw new Error('Method not implemented!');
     }
 

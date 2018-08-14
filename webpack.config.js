@@ -23,7 +23,7 @@ module.exports = {
         ]
     },
     externals: {
-        "math.gl": 'math.gl',
+        //"math.gl": 'math.gl',
     },
 }
 ;

@@ -15,7 +15,7 @@ export default class WorldBorder {
         /**
          * @type {Vector3} the center position of the border.
          */
-        this.center  = center;
+        this.center = center;
         /**
          * @type {number} how long and wide the border is.
          */
@@ -49,5 +49,36 @@ export default class WorldBorder {
         let rad = diameter / 2.0;
         return x >= center.x - rad && x <= center.x + rad &&
             z >= center.z - rad && z <= center.z + rad;
+    }
+
+    /**
+     * Checks to see if the world border contains a given chunk.
+     *
+     * @param {Vector3} position the position of the chunk.
+     * @param {Vector3} center the center of the map.
+     * @param {number} diameter the diameter of the world border.
+     *
+     * @return {boolean} true if the world border contains the given chunk false otherwise.
+     */
+    static containsChunk(position, center, diameter) {
+        return this.containsChunkXZ(position.x, position.z, center, diameter);
+    }
+
+    /**
+     * Checks to see if the world border contains a given chunk.
+     *
+     * @param {number} x the x position of the chunk.
+     * @param {number} z the z position of the chunk.
+     * @param {Vector3} center the center of the map.
+     * @param {number} diameter the diameter of the world border.
+     *
+     * @return {boolean} true if the world border contains the given chunk false otherwise.
+     */
+    static containsChunkXZ(x, z, center, diameter) {
+        let rad = diameter / 2.0;
+        let nx  = x << 4;
+        let nz  = z << 4;
+        return nx >= center.x - rad && nx < center.x + rad &&
+            nz >= center.z - rad && nz < center.z + rad;
     }
 }
