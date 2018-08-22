@@ -13,7 +13,7 @@ export const GLM_CONFIG = {
      *
      * @type {boolean} true if the client should use debug functions false other wise.
      */
-    debug: true,
+    debug: false,
 
     /**
      * States if the client should should log WebSocket messages in plain text. debug must be enabled for this field to
@@ -28,7 +28,7 @@ export const GLM_CONFIG = {
      *
      * @type {String} ws for non encrypted web pages wss for ssl encrypted web pages.
      */
-    wsProtocol: 'wss',
+    wsProtocol: 'ws',
 
     /**
      * Specifies the maps uuid in string form.

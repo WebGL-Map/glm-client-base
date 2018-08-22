@@ -104,14 +104,27 @@ export class DataManager {
         if (this.primaryServer != null) {
             this.cleanUp();
         }
-        // Append / if ip is a hostname
-        if (!Util.ipv4Check(ip)) {
-            if (ip.charAt(ip.length - 1) !== '/') {
-                ip += '/';
+        let url = null;
+        if (port === 80 || port === 443) {
+            url = GLM_CONFIG.wsProtocol + '://' + ip;
+            if (url.charAt(url.length - 1) !== '/') {
+                url += '/';
+            }
+        } else {
+            // Append / if ip is a hostname
+            let path = null;
+            if (!Util.ipv4Check(ip)) {
+                path = ip.substring(ip.indexOf('/') + 1, ip.length - 1);
+                if (path.charAt(path.length - 1) !== '/') {
+                    path += '/';
+                }
+            }
+            url = GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
+            // Connect to primaryServer
+            if (path !== null) {
+                url += path;
             }
         }
-        // Connect to primaryServer
-        let url            = GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
         this.primaryServer = new Server(ip + ':' + port, ip, port);
         this.serverMap.set(url, this.primaryServer);
         this.primaryServer.tryWebSocket();
@@ -124,13 +137,27 @@ export class DataManager {
     connectToServer(ip, port) {
         let nServer = new Server(ip + ':' + port, ip, port);
         // Append / if ip is a hostname
-        if (!Util.ipv4Check(ip)) {
-            if (ip.charAt(ip.length - 1) !== '/') {
-                ip += '/';
+        let url = null;
+        if (port === 80 || port === 443) {
+            url = GLM_CONFIG.wsProtocol + '://' + ip;
+            if (url.charAt(url.length - 1) !== '/') {
+                url += '/';
+            }
+        } else {
+            // Append / if ip is a hostname
+            let path = null;
+            if (!Util.ipv4Check(ip)) {
+                path = ip.substring(ip.indexOf('/') + 1, ip.length - 1);
+                if (path.charAt(path.length - 1) !== '/') {
+                    path += '/';
+                }
+            }
+            url = GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
+            // Connect to primaryServer
+            if (path !== null) {
+                url += path;
             }
         }
-        // connect to additional server
-        let url = GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
         this.serverMap.set(url, nServer);
         nServer.tryWebSocket();
     }
@@ -142,6 +169,11 @@ export class DataManager {
      */
     tryError(errorNum = null) {
         // Go back to login
+        let landingDiv = $('#landingDiv');
+        if (landingDiv.css('display') === 'none') {
+            $('#mapDiv').css("z-index", "");
+            landingDiv.fadeIn('fast');
+        }
         $('#loadingDiv').fadeOut('fast', function () {
             let mainForum = $('#mainForm');
             if (!mainForum.hasClass('has-ws-error')) {
