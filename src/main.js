@@ -33,6 +33,6 @@ export {
 export GlobalStates from './glm/GlobalStates';
 export ServerStates from './glm/ServerSates';
 
-export {GLM_CONFIG as GLM_CONFIG} from './config';
-
 export * from "math.gl";
+
+import './config';

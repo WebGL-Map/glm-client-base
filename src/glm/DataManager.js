@@ -3,7 +3,6 @@ import Event from "./event/Event";
 import EventManager from "./event/EventManager";
 import PluginManager from "./plugin/PluginManager";
 import GlobalStates from "./GlobalStates";
-import {GLM_CONFIG} from "../config";
 import Server from "./data/server/Server";
 import Util from "./util/Util";
 import Stats from "stats.js";
@@ -106,7 +105,7 @@ export class DataManager {
         }
         let url = null;
         if (port === 80 || port === 443) {
-            url = GLM_CONFIG.wsProtocol + '://' + ip;
+            url = window.GLM_CONFIG.wsProtocol + '://' + ip;
             if (url.charAt(url.length - 1) !== '/') {
                 url += '/';
             }
@@ -114,18 +113,20 @@ export class DataManager {
             // Append / if ip is a hostname
             let path = null;
             if (!Util.ipv4Check(ip)) {
-                path = ip.substring(ip.indexOf('/') + 1, ip.length - 1);
-                if (path.charAt(path.length - 1) !== '/') {
-                    path += '/';
+                if(ip.indexOf('/') !== -1) {
+                    path = ip.substring(ip.indexOf('/') + 1, ip.length - 1);
+                    if (path.charAt(path.length - 1) !== '/') {
+                        path += '/';
+                    }
                 }
             }
-            url = GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
+            url = window.GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
             // Connect to primaryServer
             if (path !== null) {
                 url += path;
             }
         }
-        this.primaryServer = new Server(ip + ':' + port, ip, port);
+        this.primaryServer = new Server(url, ip, port);
         this.serverMap.set(url, this.primaryServer);
         this.primaryServer.tryWebSocket();
     }
@@ -135,11 +136,10 @@ export class DataManager {
      * @param {number} port the port to connect on.
      */
     connectToServer(ip, port) {
-        let nServer = new Server(ip + ':' + port, ip, port);
         // Append / if ip is a hostname
         let url = null;
         if (port === 80 || port === 443) {
-            url = GLM_CONFIG.wsProtocol + '://' + ip;
+            url = window.GLM_CONFIG.wsProtocol + '://' + ip;
             if (url.charAt(url.length - 1) !== '/') {
                 url += '/';
             }
@@ -147,17 +147,20 @@ export class DataManager {
             // Append / if ip is a hostname
             let path = null;
             if (!Util.ipv4Check(ip)) {
-                path = ip.substring(ip.indexOf('/') + 1, ip.length - 1);
-                if (path.charAt(path.length - 1) !== '/') {
-                    path += '/';
+                if(ip.indexOf('/') !== -1) {
+                    path = ip.substring(ip.indexOf('/') + 1, ip.length - 1);
+                    if (path.charAt(path.length - 1) !== '/') {
+                        path += '/';
+                    }
                 }
             }
-            url = GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
+            url = window.GLM_CONFIG.wsProtocol + '://' + ip + ':' + port + '/';
             // Connect to primaryServer
             if (path !== null) {
                 url += path;
             }
         }
+        let nServer = new Server(url, ip, port);
         this.serverMap.set(url, nServer);
         nServer.tryWebSocket();
     }
@@ -221,7 +224,7 @@ export class DataManager {
         this.stats.dom.style.top     = "1.5625rem";
         this.stats.dom.style.left    = ""; // unset left
         this.stats.dom.style.right   = "1.5625rem";
-        this.stats.dom.style.display = GLM_CONFIG.debug ? "inherit" : "none";
+        this.stats.dom.style.display = window.GLM_CONFIG.debug ? "inherit" : "none";
         $('#mapDiv').append(this.stats.dom);
     }
 
@@ -259,7 +262,7 @@ export class DataManager {
      * Attempts to draw frames to the current OpenGL context And queue this function to be called again by the browser.
      */
     static draw() {
-        if (GLM_CONFIG.debug) window.dataManager.stats.begin();
+        if (window.GLM_CONFIG.debug) window.dataManager.stats.begin();
         let start = Date.now();
         // Render blocks
         window.dataManager.eventManager.dispatchEvent(new Event('preTerrainRender'));
@@ -270,7 +273,7 @@ export class DataManager {
         window.dataManager.texturePack.renderPlayers(window.dataManager.selectedWorld.camera, window.dataManager.selectedWorld);
         window.dataManager.eventManager.dispatchEvent(new Event('postPlayersRender', {elapsedTime: Date.now() - start}));
 
-        if (GLM_CONFIG.debug) window.dataManager.stats.end();
+        if (window.GLM_CONFIG.debug) window.dataManager.stats.end();
 
         window._requestAnimationFrameId = requestAnimationFrame(DataManager.draw);
     }

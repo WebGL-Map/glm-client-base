@@ -1,4 +1,3 @@
-import {GLM_CONFIG} from "../../../config";
 import WebSocketClient from "../../websocket/WebSocketClient";
 import ServerStates from "../../ServerSates";
 
@@ -48,7 +47,7 @@ export default class Server {
      */
     tryWebSocket() {
         this.webSocketClient = new WebSocketClient(
-            new WebSocket(GLM_CONFIG.wsProtocol + '://' + this.ip + ':' + this.port + '/'),
+            new WebSocket(window.GLM_CONFIG.wsProtocol + '://' + this.ip + ':' + this.port + '/'),
             /**
              * On error function.
              *
@@ -56,8 +55,8 @@ export default class Server {
              */
             function (event) {
                 // Debug info
-                if (GLM_CONFIG.debug) {
-                    if (GLM_CONFIG.debugWebSocketRaw) {
+                if (window.GLM_CONFIG.debug) {
+                    if (window.GLM_CONFIG.debugWebSocketRaw) {
                         console.log(event);
                     }
                 }
@@ -73,8 +72,8 @@ export default class Server {
              */
             function (event) {
                 // debug info
-                if (GLM_CONFIG.debug) {
-                    if (GLM_CONFIG.debugWebSocketRaw) {
+                if (window.GLM_CONFIG.debug) {
+                    if (window.GLM_CONFIG.debugWebSocketRaw) {
                         console.log(event);
                     }
                 }
@@ -82,7 +81,7 @@ export default class Server {
                 window.dataManager.serverMap.get(event.target.url).webSocketClient.getNative().send(JSON.stringify({
                     cmd: "setClientUuid",
                     data: {
-                        uuid: GLM_CONFIG.uuid
+                        uuid: window.GLM_CONFIG.uuid
                     }
                 }));
                 // request info when socket is opened.
@@ -104,8 +103,8 @@ export default class Server {
             function (event) {
                 let jsonParse = null;
                 // Debug info
-                if (GLM_CONFIG.debug) {
-                    if (GLM_CONFIG.debugWebSocketRaw) {
+                if (window.GLM_CONFIG.debug) {
+                    if (window.GLM_CONFIG.debugWebSocketRaw) {
                         console.log(event);
                     }
                     jsonParse = JSON.parse(event.data);
@@ -122,8 +121,8 @@ export default class Server {
              */
             function (event) {
                 // Debug info
-                if (GLM_CONFIG.debug) {
-                    if (GLM_CONFIG.debugWebSocketRaw) {
+                if (window.GLM_CONFIG.debug) {
+                    if (window.GLM_CONFIG.debugWebSocketRaw) {
                         console.log(event);
                     }
                 }

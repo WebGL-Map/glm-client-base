@@ -5,7 +5,7 @@
  *
  * @author Tyler Bucher
  */
-export const GLM_CONFIG = {
+var GLM_CONFIG = {
 
     /**
      * States if the client should enable and use debug functions. This usually results in json being outputted to the
