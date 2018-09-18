@@ -48,26 +48,29 @@ export default class TexturePack {
     /**
      * Creates a new chunk from the texture pack.
      *
+     * @param {String} type the type of chunk to make.
      * @param {Array} dataArray the list of block data to create blocks from.
-     * @param {Array} heightDataArray the list of block height positions.
+     * @param {Array} biomeArray the list of block biome information.
+     * @param {Array} heightIndexArray the list of block indices.
      * @param {Number} x the x position.
      * @param {Number} y the y position.
      * @param {Number} z the z position.
      *
      * @return {Chunk|null} the newly created chunk or null.
      */
-    createChunk(dataArray, heightDataArray, x, y, z) {
+    createChunk(type, dataArray, biomeArray, heightIndexArray, x, y, z) {
         throw new Error('Method not implemented!');
     }
 
     /**
      * Updates a given chunk with new block information and height data.
      *
-     * @param {Chunk} chunk the chunk to update.
-     * @param {Array} dataArray the list of block data to update blocks from.
-     * @param {Array} heightDataArray the list of block height positions.
+     * @param {String} type the type of chunk to make.
+     * @param {Array} dataArray the list of block data to create blocks from.
+     * @param {Array} biomeArray the list of block biome information.
+     * @param {Array} heightIndexArray the list of block indices.
      */
-    updateChunk(chunk, dataArray, heightDataArray) {
+    updateChunk(type, dataArray, biomeArray, heightIndexArray) {
         throw new Error('Method not implemented!');
     }
 
