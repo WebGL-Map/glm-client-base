@@ -66,6 +66,8 @@ export class DataManager {
         this.blockTypes = null;
         /** @type {Array<Entry> | null} a list of block traits from the server.*/
         this.blockTraits = null;
+        /** @type {Array<BiomeType> | null} a list of block traits from the server.*/
+        this.biomeTypes = null;
         /** @type {Map<String, Server> | null} a map of all available servers this map can access.*/
         this.serverMap = null;
         /** @type {Server | null} the primary server this map connected to.*/
