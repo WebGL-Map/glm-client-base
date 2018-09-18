@@ -38,7 +38,7 @@ export default class World {
          */
         this.worldBorder = null;
         /**
-         * @type {Map<int, Map<int, Chunk>>} a map of chunks for this world.
+         * @type {Map<String, Map<int, Map<int, Chunk>>>} a map of chunks for this world.
          */
         this.chunkMap = new Map();
         /**

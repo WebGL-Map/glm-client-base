@@ -124,7 +124,7 @@ export default class TexturePack {
      * Attempts to render a set of chunks.
      *
      * @param {Camera} camera the camera to use for render testing.
-     * @param {Map<int, Map<int, Chunk>>} chunkMap the map of chunks to render.
+     * @param {Map<String, Map<int, Map<int, Chunk>>>} chunkMap the map of chunks to render.
      */
     renderBlocks(camera, chunkMap) {
         throw new Error('Method not implemented!');
