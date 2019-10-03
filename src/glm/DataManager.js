@@ -92,6 +92,7 @@ export class DataManager {
         this.eventManager.dispatchEvent(new Event("preInit"));
         this.blockTypes  = [];
         this.blockTraits = [];
+        this.biomeTypes = [];
         this.serverMap   = new Map();
         this.state       = GlobalStates.LOADING;
         this.eventManager.dispatchEvent(new Event("postInit"));
